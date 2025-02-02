@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <string.h>
+
+// Function to find the longest common prefix
+char* longestCommonPrefix(char arr[][100], int n) {
+    static char prefix[100]; // Store the common prefix
+    strcpy(prefix, arr[0]);  // Initialize prefix as the first string
+    
+    for (int i = 1; i < n; i++) {
+        int j = 0;
+        while (prefix[j] && arr[i][j] && prefix[j] == arr[i][j]) {
+            j++;
+        }
+        prefix[j] = '\0';  // Truncate the prefix
+        
+        if (prefix[0] == '\0') {
+            return "No common prefix";
+        }
+    }
+    return prefix;
+}
+
+int main() {
+    int n;
+    printf("Enter the number of strings: ");
+    scanf("%d", &n);
+    
+    char arr[n][100];  // Array to store strings
+    printf("Enter the strings:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%s", arr[i]);
+    }
+    
+    printf("Longest Common Prefix: %s\n", longestCommonPrefix(arr, n));
+    return 0;
+}
